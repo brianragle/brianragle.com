@@ -19,16 +19,6 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Diagnose remote layout (temporary)
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: access-5020327190.webspace-host.com
-          port: 22
-          username: a2165104
-          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          script: |
-            echo "pwd: $(pwd)"; echo "whoami: $(whoami)"; echo "--- home:"; ls -la | head -20; echo "--- /clickandbuilds:"; ls -la /clickandbuilds 2>&1 | head -8; echo "--- relative clickandbuilds:"; ls -la clickandbuilds 2>&1 | head -8
-
       - name: Build site
         run: |
           pip install jinja2 pyyaml markdown
@@ -42,7 +32,7 @@ jobs:
           username: a2165104
           password: ${{ secrets.IONOS_SFTP_PASSWORD }}
           source: "dist/*"
-          target: ${{ vars.IONOS_REMOTE_PATH || '/clickandbuilds/RaglePortfolio' }}
+          target: ${{ vars.IONOS_REMOTE_PATH || 'clickandbuilds/RaglePortfolio' }}
           strip_components: 1
 
       - name: Fix permissions
@@ -53,6 +43,6 @@ jobs:
           username: a2165104
           password: ${{ secrets.IONOS_SFTP_PASSWORD }}
           script: |
-            ROOT="${{ vars.IONOS_REMOTE_PATH || '/clickandbuilds/RaglePortfolio' }}"
+            ROOT="${{ vars.IONOS_REMOTE_PATH || 'clickandbuilds/RaglePortfolio' }}"
             find "$ROOT" -type d -exec chmod 755 {} +
             find "$ROOT" -type f -exec chmod 644 {} +

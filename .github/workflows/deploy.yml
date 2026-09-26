@@ -1,0 +1,50 @@
+name: Deploy to IONOS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ionos-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    # Skips gracefully until the IONOS_SFTP_PASSWORD repo secret is added.
+    if: ${{ secrets.IONOS_SFTP_PASSWORD != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build site
+        run: |
+          pip install jinja2 pyyaml markdown
+          python3 build.py
+
+      - name: Upload to IONOS via SFTP
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: access-5020327190.webspace-host.com
+          port: 22
+          username: a3788793
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          source: "dist/*"
+          target: ${{ vars.IONOS_REMOTE_PATH || '/clickandbuilds/RaglePortfolio' }}
+          strip_components: 1
+
+      - name: Fix permissions
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: access-5020327190.webspace-host.com
+          port: 22
+          username: a3788793
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          script: |
+            ROOT="${{ vars.IONOS_REMOTE_PATH || '/clickandbuilds/RaglePortfolio' }}"
+            find "$ROOT" -type d -exec chmod 755 {} +
+            find "$ROOT" -type f -exec chmod 644 {} +

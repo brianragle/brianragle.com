@@ -19,6 +19,16 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Diagnose remote layout (temporary)
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: access-5020327190.webspace-host.com
+          port: 22
+          username: a2165104
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          script: |
+            echo "pwd: $(pwd)"; echo "whoami: $(whoami)"; echo "--- home:"; ls -la | head -20; echo "--- /clickandbuilds:"; ls -la /clickandbuilds 2>&1 | head -8; echo "--- relative clickandbuilds:"; ls -la clickandbuilds 2>&1 | head -8
+
       - name: Build site
         run: |
           pip install jinja2 pyyaml markdown

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}About &mdash; Brian Ragle{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap about">
+    <img class="avatar" src="{{ root }}assets/img/avatar.png" alt="Brian Ragle">
+    <div class="bio">
+      <p class="tagline">Local reporter covering Tennessee&rsquo;s Upper Cumberland. Journalist, photographer, filmmaker.</p>
+      <p>I&rsquo;m Brian Ragle, a local reporter in Tennessee&rsquo;s Upper Cumberland. This site is the clearinghouse for everything I publish: short articles, blurbs, links worth your time, and pointers to my videos and longer pieces. From here, posts go out to every platform I&rsquo;m on.</p>
+      <p>For one email every Friday with everything I posted that week, <a href="https://brianmragle.substack.com/subscribe">subscribe to the digest on Substack</a>.</p>
+      <p>Find me everywhere:</p>
+      <div class="find-grid">
+        {% for s in socials %}
+        <a href="{{ s.url }}">
+          <span class="platform">{{ s.name }}</span>
+          <span class="handle">{{ s.handle }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

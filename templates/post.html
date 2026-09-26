@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} &mdash; Brian Ragle{% endblock %}
+{% block content %}
+<article class="section">
+  <div class="wrap post">
+    <p class="meta">{{ post.date_str }} &middot; {{ post.type }}</p>
+    <h1>{{ post.title }}</h1>
+    {% if post.image %}
+    <img class="post-image" src="{{ root }}{{ post.image }}" alt="">
+    {% endif %}
+    {% if post.type == 'link' and post.link_url %}
+    <div class="link-card">
+      <span class="label">Link</span>
+      <a href="{{ post.link_url }}">{{ post.link_url }}</a>
+    </div>
+    {% endif %}
+    {% if post.type == 'video' and post.video_url %}
+    <div class="video-card">
+      <span class="label">Video</span>
+      <a href="{{ post.video_url }}">Watch on YouTube &rarr;</a>
+    </div>
+    {% endif %}
+    <div class="post-body">{{ post.html | safe }}</div>
+  </div>
+</article>
+{% endblock %}

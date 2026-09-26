@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Brian Ragle &mdash; Reporting from the Upper Cumberland{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="wrap hero-inner">
+    <img class="wordmark-hero" src="{{ root }}assets/img/wordmark-brian-ragle-dark.png" alt="Brian Ragle">
+    <div class="ember-rule"></div>
+    <p class="hero-tag">Reporting from the Upper Cumberland.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Latest posts</h2>
+      <a href="{{ root }}posts/index.html">All posts &rarr;</a>
+    </div>
+    {% for p in posts[:6] %}
+    <article class="post-card">
+      <h3><a href="{{ root }}posts/{{ p.slug }}/index.html">{{ p.title }}</a></h3>
+      <p class="meta">{{ p.date_str }} &middot; {{ p.type }}</p>
+      <p class="excerpt">{{ p.excerpt }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Find me</h2>
+    <div class="find-grid">
+      {% for s in socials %}
+      <a href="{{ s.url }}">
+        <span class="platform">{{ s.name }}</span>
+        <span class="handle">{{ s.handle }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="subscribe">
+      <h2>The weekly digest</h2>
+      <p>Weekly digest &mdash; one email, every Friday, everything I posted that week.</p>
+      <a class="btn-outline" href="https://brianmragle.substack.com/subscribe">Subscribe on Substack</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

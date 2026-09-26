@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Brian Ragle{% endblock %}</title>
+<meta name="description" content="Local reporter covering Tennessee's Upper Cumberland. Journalist, photographer, filmmaker.">
+<link rel="icon" href="{{ root }}assets/img/avatar.png">
+<link rel="stylesheet" href="{{ root }}assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a href="{{ root }}index.html" aria-label="Brian Ragle home"><img class="wordmark" src="{{ root }}assets/img/wordmark-brian-ragle-dark.png" alt="Brian Ragle" height="32"></a>
+    <nav>
+      <a href="{{ root }}index.html" class="{% if active == 'home' %}active{% endif %}">Home</a>
+      <a href="{{ root }}posts/index.html" class="{% if active == 'posts' %}active{% endif %}">Posts</a>
+      <a href="{{ root }}about/index.html" class="{% if active == 'about' %}active{% endif %}">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+{% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Brian Ragle &mdash; Local reporter covering Tennessee&rsquo;s Upper Cumberland. Journalist, photographer, filmmaker.</span>
+    <span>&copy; 2026 Brian Ragle</span>
+  </div>
+</footer>
+</body>
+</html>

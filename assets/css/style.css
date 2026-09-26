@@ -82,6 +82,38 @@ a { color: var(--ember); }
 }
 .post-card p.excerpt { color: var(--bone); opacity: 0.85; }
 
+/* Story scroll boxes (Herald-Citizen, Medium) */
+.story-scroll {
+  max-height: 380px; overflow-y: auto;
+  background: var(--iron); border: 1px solid #33291a; border-radius: 12px;
+  padding: 10px 30px; margin-bottom: 16px;
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+.story-scroll::-webkit-scrollbar { width: 10px; }
+.story-scroll::-webkit-scrollbar-track { background: transparent; }
+.story-scroll::-webkit-scrollbar-thumb {
+  background: var(--ember); border-radius: 8px;
+  border: 2px solid var(--iron);
+}
+.story-scroll { scrollbar-width: thin; scrollbar-color: var(--ember) var(--iron); }
+.story-scroll ul { list-style: none; }
+.story-scroll li {
+  padding: 13px 6px; border-bottom: 1px solid var(--coal);
+  display: flex; gap: 18px; align-items: baseline;
+  border-radius: 6px; transition: background 0.15s ease;
+}
+.story-scroll li:last-child { border-bottom: none; }
+.story-scroll li:hover { background: rgba(196, 123, 52, 0.07); }
+.story-scroll .date {
+  color: var(--ember); font-size: 13px; font-weight: 600;
+  min-width: 110px; flex-shrink: 0; letter-spacing: 0.03em;
+}
+.story-scroll a {
+  color: var(--bone); text-decoration: none;
+  font-weight: 600; font-size: 16px; letter-spacing: -0.01em;
+}
+.story-scroll a:hover { color: var(--ember); }
+
 /* Find me */
 .find-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));

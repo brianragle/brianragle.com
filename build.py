@@ -24,6 +24,9 @@ DIST_DIR = ROOT / "dist"
 
 SITE_URL = "https://brianragle.com"
 
+HC_STORIES_FILE = ROOT / "hc_stories.yaml"
+MEDIUM_STORIES_FILE = ROOT / "medium_stories.yaml"
+
 SOCIALS = [
     {"name": "Instagram", "handle": "@brianragle", "url": "https://www.instagram.com/brianragle"},
     {"name": "Threads", "handle": "@brianragle", "url": "https://www.threads.com/@brianragle"},
@@ -81,6 +84,15 @@ def main() -> None:
     DIST_DIR.mkdir(parents=True)
     shutil.copytree(ASSETS_DIR, DIST_DIR / "assets")
 
+    if HC_STORIES_FILE.exists():
+        hc_stories = yaml.safe_load(HC_STORIES_FILE.read_text(encoding="utf-8")) or []
+    else:
+        hc_stories = []
+    if MEDIUM_STORIES_FILE.exists():
+        medium_stories = yaml.safe_load(MEDIUM_STORIES_FILE.read_text(encoding="utf-8")) or []
+    else:
+        medium_stories = []
+
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=True)
 
     def render(template_name, out_path, root, **ctx):
@@ -89,7 +101,7 @@ def main() -> None:
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(html, encoding="utf-8")
 
-    render("home.html", DIST_DIR / "index.html", "", active="home", posts=posts)
+    render("home.html", DIST_DIR / "index.html", "", active="home", posts=posts, hc_stories=hc_stories, medium_stories=medium_stories)
     render("archive.html", DIST_DIR / "posts" / "index.html", "../", active="posts", posts=posts)
     render("about.html", DIST_DIR / "about" / "index.html", "../", active="about")
     for post in posts:

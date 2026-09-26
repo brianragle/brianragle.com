@@ -27,6 +27,32 @@
 
 <section class="section">
   <div class="wrap">
+    <h2>Herald-Citizen stories</h2>
+    <div class="story-scroll">
+      <ul>
+        {% for s in hc_stories %}
+        <li><span class="date">{{ s.date }}</span><a href="{{ s.url }}">{{ s.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Medium stories</h2>
+    <div class="story-scroll">
+      <ul>
+        {% for s in medium_stories %}
+        <li><span class="date">{{ s.date }}</span><a href="{{ s.url }}">{{ s.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
     <h2>Find me</h2>
     <div class="find-grid">
       {% for s in socials %}

@@ -24,6 +24,13 @@ Each platform gets a formatter that takes the canonical post and returns platfor
 
 Formatters handle: character limits (truncate with care, never mid-word; link always survives), image attach where supported, alt text carried through, and per-platform voice tweaks documented per formatter.
 
+## Voice and formatting rules (standing, from Brian 2026-09-26)
+
+- Distill, don't rewrite: the brianragle.com post as he wrote and approved it is the canonical text. Per-platform versions only condense for character/post limits — never rewrite, embellish, or add framing he didn't approve. Truncate with care, never mid-word; the link always survives.
+- Minimal emojis. He is not a tween or millennial.
+- His voice always: the Ragle voice rules apply to every platform version (`~/workspace/user/files/ragle-voice-prompt.md` — no em-dashes, no hedging, no rhetorical-question-plus-answer, dry and aimed at arguments).
+- Abbreviate where necessary to fit constraints, but keep his wording wherever it fits.
+
 ## Video flow
 
 Videos are posted directly to the video platforms; brianragle.com carries only a blurb + link, and that blurb is what cross-posts to the text platforms:

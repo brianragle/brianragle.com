@@ -11,8 +11,6 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    # Skips gracefully until the IONOS_SFTP_PASSWORD repo secret is added.
-    if: ${{ secrets.IONOS_SFTP_PASSWORD != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

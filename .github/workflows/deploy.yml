@@ -29,7 +29,7 @@ jobs:
         with:
           host: access-5020327190.webspace-host.com
           port: 22
-          username: a3788793
+          username: a2165104
           password: ${{ secrets.IONOS_SFTP_PASSWORD }}
           source: "dist/*"
           target: ${{ vars.IONOS_REMOTE_PATH || '/clickandbuilds/RaglePortfolio' }}
@@ -40,7 +40,7 @@ jobs:
         with:
           host: access-5020327190.webspace-host.com
           port: 22
-          username: a3788793
+          username: a2165104
           password: ${{ secrets.IONOS_SFTP_PASSWORD }}
           script: |
             ROOT="${{ vars.IONOS_REMOTE_PATH || '/clickandbuilds/RaglePortfolio' }}"

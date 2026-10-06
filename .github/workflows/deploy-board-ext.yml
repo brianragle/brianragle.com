@@ -1,0 +1,58 @@
+name: Deploy board extension
+
+# Deploys the phpBB API extension to the private board at board.brianragle.com
+# (Click & Build install lives at clickandbuilds/Board in the same webspace).
+# Runs manually or when board-ext/ changes. Does not touch the main site.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'board-ext/**'
+      - '.github/workflows/deploy-board-ext.yml'
+
+concurrency:
+  group: ionos-board-ext
+  cancel-in-progress: true
+
+jobs:
+  deploy-ext:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload extension zip to IONOS via SFTP
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: access-5020327190.webspace-host.com
+          port: 22
+          username: a2165104
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          source: "board-ext/phpbb-api.zip"
+          target: "clickandbuilds/Board/ext/"
+          strip_components: 1
+
+      - name: Extract extension and fix permissions
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: access-5020327190.webspace-host.com
+          port: 22
+          username: a2165104
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          script: |
+            set -e
+            cd clickandbuilds/Board/ext
+            rm -rf dmzx/phpbbapi ext-tmp
+            mkdir -p ext-tmp dmzx/phpbbapi
+            if command -v unzip >/dev/null 2>&1; then
+              unzip -q -o phpbb-api.zip -d ext-tmp
+            else
+              python3 -c "import zipfile; zipfile.ZipFile('phpbb-api.zip').extractall('ext-tmp')"
+            fi
+            mv ext-tmp/dmzx/phpbbapi/* dmzx/phpbbapi/
+            rm -rf ext-tmp phpbb-api.zip
+            test -f dmzx/phpbbapi/composer.json
+            find dmzx/phpbbapi -type d -exec chmod 755 {} +
+            find dmzx/phpbbapi -type f -exec chmod 644 {} +
+            echo "EXT_DEPLOY_OK"

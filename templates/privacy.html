@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy &mdash; Brian Ragle{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap">
+    <h1>Privacy Policy &mdash; Desert Honey Uploader</h1>
+    <p>Effective date: October 19, 2026</p>
+    <p>Desert Honey Uploader is a private, single-user tool operated by Brian Ragle (brianragle.com). It is not a public service and has no other users.</p>
+    <h2>What the app does</h2>
+    <p>The app uploads videos, thumbnails, captions, titles, descriptions, and tags to Brian Ragle&rsquo;s own YouTube channel using the YouTube Data API v3, under Brian Ragle&rsquo;s own Google account authorization (OAuth 2.0).</p>
+    <h2>Data accessed</h2>
+    <p>The app accesses only the YouTube account data needed to perform those uploads on the account owner&rsquo;s behalf. The OAuth refresh token is stored locally, on Brian Ragle&rsquo;s own computer, in the app&rsquo;s private configuration folder. It is not transmitted to any third party, sold, shared, or used for advertising, analytics, or tracking.</p>
+    <h2>Data collection and retention</h2>
+    <p>The app collects no personal information about any other person. No data is stored on any server operated by the app. Upload logs are kept locally on the operator&rsquo;s computer for operational purposes only.</p>
+    <h2>Revoking access</h2>
+    <p>Access can be revoked at any time from the Google account&rsquo;s third-party access page (myaccount.google.com/permissions), which immediately invalidates the stored token.</p>
+    <h2>Contact</h2>
+    <p>Brian Ragle &mdash; bragle@gmail.com</p>
+  </div>
+</section>
+{% endblock %}

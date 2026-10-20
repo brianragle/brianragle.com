@@ -104,6 +104,7 @@ def main() -> None:
     render("home.html", DIST_DIR / "index.html", "", active="home", posts=posts, hc_stories=hc_stories, medium_stories=medium_stories)
     render("archive.html", DIST_DIR / "posts" / "index.html", "../", active="posts", posts=posts)
     render("about.html", DIST_DIR / "about" / "index.html", "../", active="about")
+    render("privacy.html", DIST_DIR / "privacy" / "index.html", "../", active="privacy")
     for post in posts:
         render(
             "post.html",
